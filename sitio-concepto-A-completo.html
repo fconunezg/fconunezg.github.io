@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francisco Núñez García — Riesgo & Cumplimiento</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #05070B;
+  color: #E8ECF1;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #0A0E14;
+  border-left: 1px solid #1B222D;
+  border-right: 1px solid #1B222D;
+}
+
+/* ===== NAV ===== */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 40px;
+  border-bottom: 1px solid #1B222D;
+  position: sticky;
+  top: 0;
+  background: rgba(10,14,20,0.92);
+  backdrop-filter: blur(6px);
+  z-index: 10;
+}
+.nav-brand {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: #E8ECF1;
+}
+.nav-brand b { color: #FFB020; }
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7C8798;
+}
+.nav-links a:hover { color: #00E5C7; }
+
+/* ===== TOPBAR / STATUS ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  border-bottom: 1px solid #1B222D;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #7C8798;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00E5C7;
+  margin-right: 8px;
+  box-shadow: 0 0 8px #00E5C7;
+  animation: pulse 1.8s infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: 64px 40px 56px;
+  border-bottom: 1px solid #1B222D;
+  overflow: hidden;
+}
+.scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FFB020, transparent);
+  animation: sweep 3.6s linear infinite;
+  opacity: 0.7;
+}
+@keyframes sweep { 0% { transform: translateY(0); } 100% { transform: translateY(340px); } }
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: #FFB020;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before { content: ''; width: 24px; height: 1px; background: #FFB020; }
+
+.h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  max-width: 780px;
+}
+.h1 .accent { color: #00E5C7; }
+
+.lede {
+  font-size: 17px;
+  line-height: 1.55;
+  color: #A8B2C0;
+  max-width: 540px;
+  margin: 0 0 32px;
+}
+.lede b { color: #E8ECF1; font-weight: 500; }
+
+.cta-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  padding: 13px 24px;
+  border: 1px solid #FFB020;
+  color: #0A0E14;
+  background: #FFB020;
+  border-radius: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+}
+.btn-ghost {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  padding: 13px 24px;
+  border: 1px solid #2A3341;
+  color: #A8B2C0;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.seal {
+  position: absolute;
+  right: 40px;
+  top: 56px;
+  width: 108px;
+  height: 108px;
+  border: 2px solid #FFB020;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  text-align: center;
+  color: #FFB020;
+  line-height: 1.3;
+}
+
+/* ===== METRICS ===== */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid #1B222D;
+}
+.metric { padding: 22px 28px; border-right: 1px solid #1B222D; }
+.metric:last-child { border-right: none; }
+.metric-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #00E5C7;
+}
+.metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: #7C8798;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ===== SECTION SHARED ===== */
+.section {
+  padding: 56px 40px;
+  border-bottom: 1px solid #1B222D;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 30px;
+}
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+.section-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #7C8798;
+}
+
+/* ===== ABOUT ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+}
+.about-text {
+  font-size: 15.5px;
+  color: #B7C0CC;
+  line-height: 1.75;
+}
+.about-text b { color: #E8ECF1; font-weight: 500; }
+.about-side {
+  border-left: 1px solid #1B222D;
+  padding-left: 28px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+}
+.about-side-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #161C26;
+  color: #7C8798;
+}
+.about-side-row span:last-child { color: #E8ECF1; }
+
+/* ===== MODULES / COMPETENCIAS ===== */
+.grid-modules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #1B222D;
+  border: 1px solid #1B222D;
+}
+.mod { background: #0D1219; padding: 18px 18px 16px; }
+.mod-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.mod-name { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: #E8ECF1; }
+.mod-status {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9.5px;
+  color: #00E5C7;
+  border: 1px solid #1E4A44;
+  padding: 2px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.mod-bar { height: 3px; background: #1B222D; border-radius: 2px; overflow: hidden; }
+.mod-bar-fill { height: 100%; background: #FFB020; width: 100%; }
+.mod-group-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: #4B5566;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 28px 0 12px;
+}
+.mod-group-label:first-child { margin-top: 0; }
+
+/* ===== EXPERIENCIA / LEDGER ===== */
+.ledger { border: 1px solid #1B222D; }
+.ledger-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 200px;
+  border-bottom: 1px solid #1B222D;
+  padding: 20px 20px;
+  gap: 16px;
+}
+.ledger-row:last-child { border-bottom: none; }
+.ledger-ref {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #FFB020;
+  align-self: start;
+}
+.ledger-main-role {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.ledger-main-desc {
+  font-size: 13.5px;
+  color: #8D97A6;
+  line-height: 1.6;
+}
+.ledger-meta {
+  text-align: right;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: #7C8798;
+}
+.ledger-meta .company { color: #00E5C7; display: block; margin-bottom: 4px; }
+
+/* ===== SERVICIOS ===== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #1B222D;
+  border: 1px solid #1B222D;
+}
+.service {
+  background: #0D1219;
+  padding: 26px 22px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.service-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: #FFB020;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.service-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.service-desc {
+  font-size: 13.5px;
+  color: #8D97A6;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 18px;
+}
+.service-cta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: #00E5C7;
+}
+
+/* ===== CONTACT ===== */
+.contact-section { padding: 56px 40px 64px; border-bottom: none; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.contact-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #1B222D;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+}
+.contact-list-item span:first-child { color: #7C8798; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+.contact-list-item a { color: #E8ECF1; }
+.contact-list-item a:hover { color: #00E5C7; }
+
+.footer {
+  padding: 22px 40px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: #4B5566;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .hero { padding: 48px 22px 40px; }
+  .metrics, .grid-modules, .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-side { border-left: none; padding-left: 0; border-top: 1px solid #1B222D; padding-top: 20px; }
+  .seal { display: none; }
+  .section, .contact-section { padding: 40px 22px; }
+  .ledger-row { grid-template-columns: 1fr; }
+  .ledger-meta { text-align: left; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="nav-brand"><b>FN</b> / GRC.CL</div>
+    <div class="nav-links">
+      <a href="#about">Perfil</a>
+      <a href="#competencias">Competencias</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <div class="topbar">
+    <span><span class="dot"></span>SISTEMA / MONITOREO ACTIVO</span>
+    <span>SANTIAGO, CL</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="scanline"></div>
+    <div class="eyebrow">Consultor Independiente · Riesgo &amp; Cumplimiento</div>
+    <h1 class="h1">El riesgo,<br>bajo <span class="accent">control</span>.</h1>
+    <p class="lede">Convierto el cumplimiento normativo en ventaja competitiva. <b>15+ años</b> auditando, implementando y automatizando sistemas de control en banca, retail y fintech — con la mirada técnica de quien también construye el software.</p>
+    <div class="cta-row">
+      <a href="#contacto" class="btn">Agendar diagnóstico →</a>
+      <a href="#experiencia" class="btn-ghost">Ver experiencia</a>
+    </div>
+    <div class="seal">COMPLIANCE<br>VERIFIED<br>★ FN ★</div>
+  </section>
+
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="metric"><div class="metric-val">15+</div><div class="metric-label">Años en GRC</div></div>
+    <div class="metric"><div class="metric-val">6</div><div class="metric-label">Industrias</div></div>
+    <div class="metric"><div class="metric-val">2</div><div class="metric-label">Startups fundadas</div></div>
+    <div class="metric"><div class="metric-val">100%</div><div class="metric-label">Cobertura normativa</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-head">
+      <div class="section-title">Perfil</div>
+      <div class="section-count">01 / SOBRE MÍ</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Soy Contador Público y Auditor (USACH), con <b>más de 15 años</b> diseñando e implementando sistemas de control en compañías como IKEA, Ripley, Santander, Tanner y EuroAmerica. He liderado la función de Oficial de Cumplimiento y Delegado de Protección de Datos, gestionado auditorías internas y externas, y reportado directamente a Alta Administración y comités de directorio.</p>
+        <p style="margin-top:16px;">A diferencia de la mayoría de los consultores del rubro, también he construido software: cofundé una app de cuidado de mascotas publicada en ambas tiendas, y lideré un proyecto fintech de pagos digitales integrado con Transbank. Esa doble mirada — <b>auditor y desarrollador</b> — es la que aplico hoy a cada sistema de control que diseño: no solo lo documento, entiendo cómo se construye y automatiza.</p>
+      </div>
+      <div class="about-side">
+        <div class="about-side-row"><span>Título</span><span>Contador Público y Auditor</span></div>
+        <div class="about-side-row"><span>Casa de estudios</span><span>Universidad de Santiago</span></div>
+        <div class="about-side-row"><span>Idiomas</span><span>Español, Inglés avanzado</span></div>
+        <div class="about-side-row"><span>Ubicación</span><span>Santiago, Chile</span></div>
+        <div class="about-side-row"><span>Modalidad</span><span>Proyecto / Retainer</span></div>
+        <div class="about-side-row"><span>Estado</span><span style="color:#00E5C7;">Disponible</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCIAS -->
+  <section class="section" id="competencias">
+    <div class="section-head">
+      <div class="section-title">Módulos de cobertura</div>
+      <div class="section-count">13 ACTIVOS</div>
+    </div>
+
+    <div class="mod-group-label">Riesgo &amp; Cumplimiento</div>
+    <div class="grid-modules">
+      <div class="mod"><div class="mod-top"><span class="mod-name">Matrices de Riesgo</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Riesgo Operacional</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Modelo Prev. Delitos (Ley 20.393)</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Ley de Delitos Económicos</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">DPO / Ley 21.719</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Prevención AML</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+    </div>
+
+    <div class="mod-group-label">Auditoría &amp; Control</div>
+    <div class="grid-modules">
+      <div class="mod"><div class="mod-top"><span class="mod-name">Auditoría Interna y Externa</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Control Interno</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">KPIs &amp; Reporting Ejecutivo</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+    </div>
+
+    <div class="mod-group-label">Tecnología &amp; Herramientas</div>
+    <div class="grid-modules">
+      <div class="mod"><div class="mod-top"><span class="mod-name">SAP · ACL · IDEA</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">SQL · Power BI</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Bizagi · Jira</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+      <div class="mod"><div class="mod-top"><span class="mod-name">Ruby / Desarrollo Web</span><span class="mod-status">LIVE</span></div><div class="mod-bar"><div class="mod-bar-fill"></div></div></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section class="section" id="experiencia">
+    <div class="section-head">
+      <div class="section-title">Registro de experiencia</div>
+      <div class="section-count">02 / LEDGER</div>
+    </div>
+    <div class="ledger">
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2025</div>
+        <div>
+          <div class="ledger-main-role">Risk &amp; Compliance Specialist</div>
+          <div class="ledger-main-desc">Oficial de Cumplimiento y DPO. Implementación del Modelo de Prevención de Delitos y el Programa de Protección de Datos. Reporte de KCIs al directorio y cumplimiento de estándares IConduct e IWAY con alcance regional (Chile y Colombia).</div>
+        </div>
+        <div class="ledger-meta"><span class="company">IKEA</span>Mar 2025 — Presente</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2022</div>
+        <div>
+          <div class="ledger-main-role">Auditor Senior Compliance Corporativo</div>
+          <div class="ledger-main-desc">Implementación del Modelo de Prevención de Delitos en filiales Retail Chile y Banco Perú. Diseño de metodología para sistematizar la Ley de Delitos Económicos a nivel de grupo.</div>
+        </div>
+        <div class="ledger-meta"><span class="company">Ripley Chile</span>Dic 2022 — Mar 2025</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2021</div>
+        <div>
+          <div class="ledger-main-role">Emprendedor / Co-Fundador</div>
+          <div class="ledger-main-desc">Gestión de producto de app móvil publicada en Google Play y App Store: roadmap, sprints de desarrollo, pagos digitales y métricas de desempeño.</div>
+        </div>
+        <div class="ledger-meta"><span class="company">Odypets</span>Sep 2021 — Oct 2022</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2019</div>
+        <div>
+          <div class="ledger-main-role">Líder de Proyecto Fintech</div>
+          <div class="ledger-main-desc">Definición de iniciativas para operativizar un servicio de pagos. Coordinación de integración tecnológica y regulatoria con Transbank hasta la puesta en marcha pública.</div>
+        </div>
+        <div class="ledger-meta"><span class="company">AlteraPay</span>Sep 2019 — Sep 2021</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2015</div>
+        <div>
+          <div class="ledger-main-role">Auditor Interno</div>
+          <div class="ledger-main-desc">Auditorías internas en todas las verticales del negocio financiero. Investigación y resolución de casos de fraude, con foco especial en procesos AML.</div>
+        </div>
+        <div class="ledger-meta"><span class="company">Tanner</span>May 2015 — Sep 2019</div>
+      </div>
+      <div class="ledger-row">
+        <div class="ledger-ref">REF—2007</div>
+        <div>
+          <div class="ledger-main-role">Auditor Interno Staff / Auditor Interno y Cumplimiento</div>
+          <div class="ledger-main-desc">Auditorías internas y análisis forense de operaciones bursátiles en EuroAmerica. Investigación de fraude y certificación del Modelo de Prevención de Delitos en Metrogas.</div>
+        </div>
+        <div class="ledger-meta"><span class="company">EuroAmerica / Metrogas</span>Dic 2007 — Abr 2015</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="section-head">
+      <div class="section-title">Consultoría</div>
+      <div class="section-count">03 / SERVICIOS</div>
+    </div>
+    <div class="services-grid">
+      <div class="service">
+        <div class="service-tag">Proyecto puntual</div>
+        <div class="service-title">Diagnóstico de riesgo</div>
+        <div class="service-desc">Evaluación de brechas normativas, ambiente de control y exposición a riesgo operacional. Entrega un mapa de riesgos priorizado y un plan de acción concreto.</div>
+        <div class="service-cta">Solicitar propuesta →</div>
+      </div>
+      <div class="service">
+        <div class="service-tag">Proyecto</div>
+        <div class="service-title">Implementación MPD / DPO</div>
+        <div class="service-desc">Diseño e implementación del Modelo de Prevención de Delitos (Ley 20.393) y/o del rol de Delegado de Protección de Datos (Ley 21.719), de principio a fin.</div>
+        <div class="service-cta">Solicitar propuesta →</div>
+      </div>
+      <div class="service">
+        <div class="service-tag">Retainer mensual</div>
+        <div class="service-title">Acompañamiento continuo</div>
+        <div class="service-desc">Rol de Oficial de Cumplimiento o DPO externo part-time: monitoreo, reporting a directorio y mejora continua del ambiente de control.</div>
+        <div class="service-cta">Solicitar propuesta →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contact-section" id="contacto">
+    <div class="section-head">
+      <div class="section-title">Contacto</div>
+      <div class="section-count">04 / CANAL DIRECTO</div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="lede" style="margin-bottom:24px;">¿Tienes una empresa mediana que necesita ordenar su sistema de control o cumplir con la nueva ley de datos personales? Conversemos.</p>
+        <a href="#" class="btn">Agendar una llamada →</a>
+      </div>
+      <div>
+        <div class="contact-list-item"><span>Email</span><a href="mailto:fco.nunezg@gmail.com">fco.nunezg@gmail.com</a></div>
+        <div class="contact-list-item"><span>Teléfono</span><a href="tel:+56982544970">+56 9 8254 4970</a></div>
+        <div class="contact-list-item"><span>LinkedIn</span><a href="https://www.linkedin.com/in/fnunezg" target="_blank">linkedin.com/in/fnunezg</a></div>
+        <div class="contact-list-item"><span>Ubicación</span><span>Santiago, Chile</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <span>© 2026 FRANCISCO NÚÑEZ GARCÍA</span>
+    <span>RIESGO · CONTROL INTERNO · CUMPLIMIENTO</span>
+  </div>
+
+</div>
+
+</body>
+</html>
